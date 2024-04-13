@@ -44,5 +44,14 @@ jobs:
     - name: Run the UI tests
       run: npm run test:ui
 
+  deploy:
+    needs: build_and_run_ui_tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy the application to Render
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.SLAMSTER_APP_RENDER_SERVICE_ID }}
+          api-key: ${{ secrets.SLAMSTER_APPLICATION_API_KEY }}
     
 
