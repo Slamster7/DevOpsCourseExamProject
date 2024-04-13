@@ -18,6 +18,9 @@ jobs:
       with:
         node-version: 20.x
         cache: 'npm'
-    - run: npm install
-    - run: npm run test:unit
-    - run: echo "slamster7"
+    - name: Install NPM packages
+      run: npm install
+    - name: Run the Unit tests
+      run: npm run test:unit
+    - name: Print user's Username
+      run: echo "slamster7"
