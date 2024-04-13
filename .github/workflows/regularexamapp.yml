@@ -8,7 +8,6 @@ on:
 
 jobs:
   build_and_run_unit_tests:
-
     runs-on: ubuntu-latest
     
     steps:
@@ -24,3 +23,26 @@ jobs:
       run: npm run test:unit
     - name: Print user's Username
       run: echo "slamster7"
+
+  build_and_run_ui_tests:
+    needs: build_and_run_unit_tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20.x
+        cache: 'npm'
+    - name: Install NPM packages
+      run: npm install
+    - name: Install Playwright
+      run: npx playwright install
+    - name: Start the application
+      run: npm run start &
+    - name: Run the UI tests
+      run: npm run test:ui
+
+    
+
